@@ -1,0 +1,48 @@
+jainv1@lonlx20575:~/PerlProjects/Factory$ perl bin/mysql.pl 
+Available commands:
+
+  commands: list the application's commands
+      help: display a command's help screen
+
+  createdb: (unknown)
+    dropdb: (unknown)
+    dumpdb: (unknown)
+
+jainv1@lonlx20575:~/PerlProjects/Factory$ perl bin/mysql.pl help createdb
+Mandatory parameter 'database' missing in call to (eval)
+
+mysql.pl createdb [-?h] [long options...]
+	--database            
+	--configfile          
+	-h -? --usage --help  Prints this usage information.
+	--log4perl_conf       
+	--user                
+	--password            
+	--host                
+	--port                
+jainv1@lonlx20575:~/PerlProjects/Factory$ perl bin/mysql.pl help dropdb
+Mandatory parameter 'database' missing in call to (eval)
+
+mysql.pl dropdb [-?h] [long options...]
+	--configfile          
+	--database            
+	--log4perl_conf       
+	--user                
+	-h -? --usage --help  Prints this usage information.
+	--password            
+	--host                
+	--port                
+jainv1@lonlx20575:~/PerlProjects/Factory$ perl bin/mysql.pl help dumpdb
+mysql.pl dumpdb [-?h] [long options...]
+
+	--databases           
+	--configfile          
+	--log4perl_conf       
+	--dump_dir            
+	-h -? --usage --help  Prints this usage information.
+	--user                
+	--password            
+	--host                
+	--port                
+
+
