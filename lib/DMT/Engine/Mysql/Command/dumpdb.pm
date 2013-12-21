@@ -49,3 +49,39 @@ sub _dump_database {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+DMT::Engine::Mysql::Command::dropdb
+
+=head1 COMMAND OPTIONS
+
+=over 1
+
+=item user
+
+=item password
+
+=item databases
+
+=over 1
+
+list of databases to be dumped. 
+to be used as 
+--databases foo --databases bar
+
+=back
+
+=item configfile
+
+=item log4perl_conf
+
+=item dump_dir
+
+
+=back
+
+=cut
+

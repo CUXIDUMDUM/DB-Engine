@@ -39,3 +39,28 @@ sub _drop_database {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+DMT::Engine::Mysql::Command::dropdb
+
+=head1 COMMAND OPTIONS
+
+=over 1
+
+=item user
+
+=item password
+
+=item database
+
+=item configfile
+
+=item log4perl_conf
+
+=back
+
+=cut
+

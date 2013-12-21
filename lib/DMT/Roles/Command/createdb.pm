@@ -15,3 +15,11 @@ sub execute{
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+DMT::Roles::Command::createdb
+
+=cut
