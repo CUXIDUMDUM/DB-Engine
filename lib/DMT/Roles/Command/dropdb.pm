@@ -6,8 +6,6 @@ use 5.019;
 use Data::Dump qw(dump);
 use Carp;
 
-with 'DMT::Roles::Command::Core';
-
 requires qw(_drop_database);
 
 sub execute {

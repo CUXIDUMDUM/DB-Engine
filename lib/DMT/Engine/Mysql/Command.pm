@@ -10,6 +10,7 @@ use File::Which qw( which );
 
 extends 'MooseX::App::Cmd::Command';
 with 'MooseX::SimpleConfig';
+with 'DMT::Roles::Command::Core';
 
 Readonly my $MYSQL      => q(mysql);
 Readonly my $MYSQLADMIN => q(mysqladmin);
@@ -23,6 +24,10 @@ for my $attr (qw( user password host port )) {
     );
 }
 
+has '+logger' => (
+    traits => [qw/NoGetopt/],
+);
+
 sub _get_mysql_cli {
     my ($self) = @_;
 
@@ -35,6 +40,8 @@ sub _get_mysql_cli {
     push @cmd, $MYSQL;
     push @cmd, q( --user=)     . $self->user if defined $self->user;
     push @cmd, q( --password=) . $self->password if defined $self->password;
+    push @cmd, q( --host ) . $self->host if defined $self->host;
+    push @cmd, q( --port ) . $self->port if defined $self->port;
 
     return wantarray ? @cmd : "@cmd";
 }
@@ -50,6 +57,8 @@ sub _get_mysqldump_cli {
     push @cmd, $MYSQLDUMP;
     push @cmd, q( --user=)     . $self->user if defined $self->user;
     push @cmd, q( --password=) . $self->password if defined $self->password;
+    push @cmd, q( --host ) . $self->host if defined $self->host;
+    push @cmd, q( --port ) . $self->port if defined $self->port;
 
     return wantarray ? @cmd : "@cmd";
 }

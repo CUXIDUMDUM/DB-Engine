@@ -7,15 +7,18 @@ use Data::Dump qw(dump);
 use Carp;
 use IPC::Run3;
 
+with 'DMT::Roles::Logger';
+
 sub _call_run3 {
-    shift;
+    my ($self) = shift;
     my $cmd    = shift;
     my $stdin  = shift || \undef;
 
-    my $stderr = sub { say $_ for @_; };
-    my $stdout = sub { say $_ for @_; };
+    my $stderr = sub { $self->logger->warn($_) for @_; };
+    my $stdout = sub { $self->logger->info($_) for @_; };
 
-    say qq(running $cmd );
+    $self->logger->debug(qq(running $cmd ));
+
     run3(
         $cmd,
         $stdin,
