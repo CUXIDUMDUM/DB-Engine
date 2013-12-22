@@ -1,4 +1,4 @@
-$ bin/mysql.pl
+bin/mysql.pl
 Available commands:
 
   commands: list the application's commands
@@ -8,7 +8,7 @@ Available commands:
     dropdb: Drop a MYSQL database
     dumpdb: Dump MYSQL databases(s) to a directory
 
-$ bin/mysql.pl help
+bin/mysql.pl help
 Available commands:
 
   commands: list the application's commands
@@ -18,7 +18,7 @@ Available commands:
     dropdb: Drop a MYSQL database
     dumpdb: Dump MYSQL databases(s) to a directory
 
-$ bin/mysql.pl help createdb
+bin/mysql.pl help createdb
 Mandatory parameter 'database' missing in call to (eval)
 
 mysql.pl createdb [-?h] [long options...]
@@ -28,13 +28,14 @@ mysql.pl createdb [-?h] [long options...]
 	--user               mysql user
 	--password           mysql password
 	--host               mysql host
+	--port               mysql port
 	--log4perl_conf      config file for Log::Log4perl. default
 	                     etc/log4perl.conf
 	--configfile         yaml config file to specify all command line
 	                     options
-	--port               mysql port
+	--dry_run            Do not run any system commands
 
-$ bin/mysql.pl help dropdb
+bin/mysql.pl help dropdb
 Mandatory parameter 'database' missing in call to (eval)
 
 mysql.pl dropdb [-?h] [long options...]
@@ -44,26 +45,28 @@ mysql.pl dropdb [-?h] [long options...]
 	--user               mysql user
 	--password           mysql password
 	--host               mysql host
+	--port               mysql port
 	--configfile         yaml config file to specify all command line
 	                     options
-	--port               mysql port
+	--dry_run            Do not run any system commands
 	--log4perl_conf      config file for Log::Log4perl. default
 	                     etc/log4perl.conf
 
-$ bin/mysql.pl help dumpdb
+bin/mysql.pl help dumpdb
 mysql.pl dumpdb [-?h] [long options...]
 
 	--databases          List of databases to be dumped. To be used as
 	                     --database db1 --database db2.
+	-h -? --usage --help  Prints this usage information.
 	--dump_dir           Base directory where all database would be
 	                     dumped to
-	-h -? --usage --help  Prints this usage information.
 	--user               mysql user
 	--password           mysql password
 	--host               mysql host
 	--port               mysql port
-	--log4perl_conf      config file for Log::Log4perl. default
-	                     etc/log4perl.conf
 	--configfile         yaml config file to specify all command line
 	                     options
+	--dry_run            Do not run any system commands
+	--log4perl_conf      config file for Log::Log4perl. default
+	                     etc/log4perl.conf
 

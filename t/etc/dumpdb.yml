@@ -1,0 +1,5 @@
+user: root
+password: admin
+dump_dir: /tmp/dump
+databases:
+  - foo

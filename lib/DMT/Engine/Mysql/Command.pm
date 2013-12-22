@@ -114,6 +114,10 @@ mysql host
 
 mysql port
 
+=item dry_run
+
+Dry Run. Do not run system commands
+
 =back
 
 =cut

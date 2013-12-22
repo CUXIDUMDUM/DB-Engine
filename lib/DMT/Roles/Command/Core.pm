@@ -9,6 +9,13 @@ use IPC::Run3;
 
 with 'DMT::Roles::Logger';
 
+has 'dry_run' => (
+    is            => 'ro',
+    isa           => 'Bool',
+    documentation => 'Do not run any system commands',
+    default       => 0,
+);
+
 sub _call_run3 {
     my ($self) = shift;
     my $cmd    = shift;
@@ -18,6 +25,8 @@ sub _call_run3 {
     my $stdout = sub { $self->logger->info($_) for @_; };
 
     $self->logger->debug(qq(running $cmd ));
+
+    return if $self->dry_run;
 
     run3(
         $cmd,
