@@ -29,12 +29,14 @@ for my $cmd ( @commands ) {
         use_ok($CLASS);
         my $configfile = File::Spec->catfile('t', 'etc', qq($cmd) . '.yml');
 
-        my $object = $CLASS->new_with_config( configfile => $configfile );
+        my $object = $CLASS->new_with_config( configfile => $configfile, dry_run => 1, );
         isa_ok($object, $CLASS);
         can_ok($object, q(execute));
 
         ok( $object->meta->does_role(q(DMT::Roles::Command::Core) ), 'Does Role DMT::Roles::Command::Core');
         ok( $object->meta->does_role(q(DMT::Roles::Command::) . $cmd), 'Does Role DMT::Roles::Command::' . $cmd);
+
+        lives_ok { $object->execute } 'Command Executed Successfully in Dry Run';
     }
 }
 
