@@ -16,3 +16,17 @@ sub execute {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+DMT::Roles::Command::dropdb
+
+=head1 DESCRIPTION
+
+This role will ensure the consuming class provides the _drop_database method
+
+=cut
+
+

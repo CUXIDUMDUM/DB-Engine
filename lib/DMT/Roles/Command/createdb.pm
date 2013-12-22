@@ -22,4 +22,8 @@ __END__
 
 DMT::Roles::Command::createdb
 
+=head1 DESCRIPTION
+
+This role will ensure the consuming class provides the _create_database method
+
 =cut
