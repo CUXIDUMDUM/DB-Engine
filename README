@@ -1,48 +1,69 @@
-jainv1@lonlx20575:~/PerlProjects/Factory$ perl bin/mysql.pl 
+$ bin/mysql.pl
 Available commands:
 
   commands: list the application's commands
       help: display a command's help screen
 
-  createdb: (unknown)
-    dropdb: (unknown)
-    dumpdb: (unknown)
+  createdb: Create a MYSQL database
+    dropdb: Drop a MYSQL database
+    dumpdb: Dump MYSQL databases(s) to a directory
 
-jainv1@lonlx20575:~/PerlProjects/Factory$ perl bin/mysql.pl help createdb
+$ bin/mysql.pl help
+Available commands:
+
+  commands: list the application's commands
+      help: display a command's help screen
+
+  createdb: Create a MYSQL database
+    dropdb: Drop a MYSQL database
+    dumpdb: Dump MYSQL databases(s) to a directory
+
+$ bin/mysql.pl help createdb
 Mandatory parameter 'database' missing in call to (eval)
 
 mysql.pl createdb [-?h] [long options...]
-	--database            
-	--configfile          
+	--database           Name of the database to be created. Mandatory
+	                     option.
 	-h -? --usage --help  Prints this usage information.
-	--log4perl_conf       
-	--user                
-	--password            
-	--host                
-	--port                
-jainv1@lonlx20575:~/PerlProjects/Factory$ perl bin/mysql.pl help dropdb
+	--user               mysql user
+	--password           mysql password
+	--host               mysql host
+	--log4perl_conf      config file for Log::Log4perl. default
+	                     etc/log4perl.conf
+	--configfile         yaml config file to specify all command line
+	                     options
+	--port               mysql port
+
+$ bin/mysql.pl help dropdb
 Mandatory parameter 'database' missing in call to (eval)
 
 mysql.pl dropdb [-?h] [long options...]
-	--configfile          
-	--database            
-	--log4perl_conf       
-	--user                
+	--database           Name of the database to be dropped. Mandatory
+	                     Option.
 	-h -? --usage --help  Prints this usage information.
-	--password            
-	--host                
-	--port                
-jainv1@lonlx20575:~/PerlProjects/Factory$ perl bin/mysql.pl help dumpdb
+	--user               mysql user
+	--password           mysql password
+	--host               mysql host
+	--configfile         yaml config file to specify all command line
+	                     options
+	--port               mysql port
+	--log4perl_conf      config file for Log::Log4perl. default
+	                     etc/log4perl.conf
+
+$ bin/mysql.pl help dumpdb
 mysql.pl dumpdb [-?h] [long options...]
 
-	--databases           
-	--configfile          
-	--log4perl_conf       
-	--dump_dir            
+	--databases          List of databases to be dumped. To be used as
+	                     --database db1 --database db2.
+	--dump_dir           Base directory where all database would be
+	                     dumped to
 	-h -? --usage --help  Prints this usage information.
-	--user                
-	--password            
-	--host                
-	--port                
-
+	--user               mysql user
+	--password           mysql password
+	--host               mysql host
+	--port               mysql port
+	--log4perl_conf      config file for Log::Log4perl. default
+	                     etc/log4perl.conf
+	--configfile         yaml config file to specify all command line
+	                     options
 
