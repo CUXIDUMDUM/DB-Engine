@@ -3,3 +3,4 @@ password: admin
 dump_dir: /tmp/dump
 databases:
   - foo
+dry_run: 1

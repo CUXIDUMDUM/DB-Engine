@@ -1,3 +1,4 @@
 user: root
 password: admin
 database: foo
+dry_run: 1
