@@ -15,6 +15,11 @@ has 'database' => (
     required => 1,
 );
 
+sub abstract {
+
+    return q(Drop a MYSQL database);
+}
+
 sub _get_drop_ddl {
     my ($self) = @_;
 
@@ -38,6 +43,8 @@ sub _drop_database {
     return;
 }
 
+__PACKAGE__->meta->make_immutable();
+
 1;
 
 __END__
@@ -46,19 +53,35 @@ __END__
 
 DMT::Engine::Mysql::Command::dropdb
 
-=head1 COMMAND OPTIONS
+=head1 DESCRIPTION
+
+Drop a mysql database
+
+=head1 PARAMETERS
 
 =over 1
 
 =item user
 
+mysql username
+
 =item password
+
+mysql password
 
 =item database
 
+name of the mysql database to drop
+
 =item configfile
 
+configfile file to contain all command line options.
+Any options provided on the command line would 
+be treated as overriden parameter
+
 =item log4perl_conf
+
+log4perl_conf file
 
 =back
 

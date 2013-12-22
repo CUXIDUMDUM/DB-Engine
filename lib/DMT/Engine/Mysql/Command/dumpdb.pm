@@ -24,6 +24,12 @@ has 'dump_dir' => (
     default  => q(/tmp),
 );
 
+sub abstract {
+
+    return q(Dump MYSQL databases(s) to a directory);
+
+}
+
 sub _dump_database_command {
 
     my ($self) = @_;
@@ -48,38 +54,60 @@ sub _dump_database {
 
 }
 
+__PACKAGE__->meta->make_immutable();
+
 1;
 
 __END__
 
 =head1 NAME
 
-DMT::Engine::Mysql::Command::dropdb
+DMT::Engine::Mysql::Command::dumpdb
 
-=head1 COMMAND OPTIONS
+=head1 DESCRIPTION
+
+dump mysql database(s) to files using the mysqldump command line utility
+
+=head1 PARAMETERS
 
 =over 1
 
 =item user
 
+mysqldump user name
+
 =item password
+
+mysqldump password
 
 =item databases
 
-=over 1
-
 list of databases to be dumped. 
-to be used as 
---databases foo --databases bar
-
-=back
+To be used as --databases foo --databases bar.
+Refer perldoc MooseX::Getopt for more details
 
 =item configfile
 
+configfile file to contain all command line options.
+Any options provided on the command line would 
+be treated as overriden parameter
+
 =item log4perl_conf
+
+Full path to log4perl conf file
 
 =item dump_dir
 
+A directory where mysql database would be dumped.
+
+The file would be dumped as 
+
+if command line has options as 
+--database foo --database bar --dump_dir /tmp/dumpdir,
+
+then files would be 
+/tmp/dumpdir/foo
+/tmp/dumpdir/bar
 
 =back
 

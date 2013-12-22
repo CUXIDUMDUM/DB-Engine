@@ -8,6 +8,8 @@ use Carp;
 
 extends 'MooseX::App::Cmd';
 
+__PACKAGE__->meta->make_immutable();
+
 1;
 
 =head1 NAME
@@ -26,11 +28,10 @@ $o->run();
 
 and then
 
-$ perl bin/mysql.pl help
+$ bin/mysql.pl help
 
-$ perl bin/mysql.pl help command
+$ bin/mysql.pl help command
 
-$ perl bin/mysql.pl command [<args>]
-
+$ bin/mysql.pl command [<args>]
 
 =cut

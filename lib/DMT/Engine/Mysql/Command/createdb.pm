@@ -15,6 +15,11 @@ has 'database' => (
     required => 1,
 );
 
+sub abstract {
+
+    return q(Create a MYSQL database);
+}
+
 sub _get_create_ddl {
     my ($self) = @_;
 
@@ -36,6 +41,8 @@ sub _create_database {
     $self->_call_run3( $self->_create_database_command() );
 }
 
+__PACKAGE__->meta->make_immutable();
+
 1;
 
 __END__
@@ -44,19 +51,35 @@ __END__
 
 DMT::Engine::Mysql::Command::createdb
 
-=head1 COMMAND OPTIONS
+=head1 DESCRIPTION
+
+Create a mysql database using the mysql command 
+
+=head1 PARAMETERS
 
 =over 1
 
 =item user
 
+mysql username 
+
 =item password
+
+mysql password
 
 =item database
 
+name of the mysql database to be created
+
 =item configfile
 
+configfile file to contain all command line options.
+Any options provided on the command line would 
+be treated as overriden parameter
+
 =item log4perl_conf
+
+log4perl_conf file
 
 =back
 

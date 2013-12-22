@@ -18,9 +18,10 @@ Readonly my $MYSQLDUMP  => q(mysqldump);
 
 for my $attr (qw( user password host port )) {
     has $attr => (
-        is        => 'rw',
-        isa       => 'Str',
-        predicate => '_has_' . $attr,
+        is            => 'rw',
+        isa           => 'Str',
+        predicate     => '_has_' . $attr,
+        documentation => 'mysql ' . $attr,
     );
 }
 
@@ -38,10 +39,14 @@ sub _get_mysql_cli {
     die "$MYSQL not executable" if not -x $executable;
 
     push @cmd, $MYSQL;
-    push @cmd, q( --user=)     . $self->user if defined $self->user;
-    push @cmd, q( --password=) . $self->password if defined $self->password;
-    push @cmd, q( --host ) . $self->host if defined $self->host;
-    push @cmd, q( --port ) . $self->port if defined $self->port;
+    push @cmd, q( --user=) . $self->user
+      if defined $self->user;
+    push @cmd, q( --password=) . $self->password
+      if defined $self->password;
+    push @cmd, q( --host ) . $self->host
+      if defined $self->host;
+    push @cmd, q( --port ) . $self->port
+      if defined $self->port;
 
     return wantarray ? @cmd : "@cmd";
 }
@@ -55,12 +60,52 @@ sub _get_mysqldump_cli {
 
     my @cmd;
     push @cmd, $MYSQLDUMP;
-    push @cmd, q( --user=)     . $self->user if defined $self->user;
-    push @cmd, q( --password=) . $self->password if defined $self->password;
-    push @cmd, q( --host ) . $self->host if defined $self->host;
-    push @cmd, q( --port ) . $self->port if defined $self->port;
+    push @cmd, q( --user=) . $self->user
+      if defined $self->user;
+    push @cmd, q( --password=) . $self->password
+      if defined $self->password;
+    push @cmd, q( --host ) . $self->host
+      if defined $self->host;
+    push @cmd, q( --port ) . $self->port
+      if defined $self->port;
 
     return wantarray ? @cmd : "@cmd";
 }
 
+__PACKAGE__->meta->make_immutable();
+
 1;
+
+__END__
+
+=head1 NAME
+
+Mysql::Command : BAse class for mysql commands
+
+=head1 DESCRIPTION
+
+This is a base class for all DMT::Engine::Mysql::Command::* commands
+
+=head1 parameters
+
+=over 1
+
+=item user 
+
+user name 
+
+=item password
+
+password
+
+=item host
+
+mysql host
+
+=item port
+
+mysql port
+
+=back
+
+=cut
