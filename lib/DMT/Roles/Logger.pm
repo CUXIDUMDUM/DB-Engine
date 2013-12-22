@@ -49,27 +49,38 @@ __END__
 
 =head1 NAME
 
-foo - Abstract
+DMT::Roles::Logger: Role for logging
 
 =head1 VERSION
 
 0.01
 
-=cut
-
 =head1 SYNOPSIS
 
+package Foo;
+
+use Moose;
+
+with 'DMT::Roles::Logger';
 
 =head1 DESCRIPTION
 
-<foo> -
+DMT::Roles::Logger: Role for logging
 
-=head1 METHODS
+in some method 
 
-=over 4
+sub foo { 
 
-=item function(arg1,arg2)
+    my ($self) = @_;
 
+    $self->logger->debug(..);
+    $self->logger->info(..);
+    $self->logger->warn(..);
+    $self->logger->error(..);
+    $self->logger->fatal(..);
 
-=item function1(arg1,arg2)
+}
+    
+Also refer perldoc Log::Log4perl
 
+=cut
