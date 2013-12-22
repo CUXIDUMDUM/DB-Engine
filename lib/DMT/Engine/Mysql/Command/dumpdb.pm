@@ -11,17 +11,20 @@ extends 'DMT::Engine::Mysql::Command';
 with 'DMT::Roles::Command::dumpdb';
 
 has 'databases' => (
-    is       => 'ro',
-    isa      => 'ArrayRef',
-    required => 1,
-    default  => sub { [] },
+    is            => 'ro',
+    isa           => 'ArrayRef',
+    required      => 1,
+    default       => sub { [] },
+    documentation => 'List of databases to be dumped.'
+      . ' To be used as --database db1 --database db2.',
 );
 
 has 'dump_dir' => (
-    is       => 'ro',
-    isa      => 'Str',
-    required => 1,
-    default  => q(/tmp),
+    is            => 'ro',
+    isa           => 'Str',
+    required      => 1,
+    default       => q(/tmp),
+    documentation => 'Base directory where all database would be dumped to',
 );
 
 sub abstract {

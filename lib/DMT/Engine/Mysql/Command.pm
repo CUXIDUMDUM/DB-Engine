@@ -29,6 +29,14 @@ has '+logger' => (
     traits => [qw/NoGetopt/],
 );
 
+has '+configfile' => (
+    documentation => 'yaml config file to specify all command line options',
+);
+
+has '+log4perl_conf' => (
+    documentation => 'config file for Log::Log4perl. default etc/log4perl.conf',
+);
+
 sub _get_mysql_cli {
     my ($self) = @_;
 

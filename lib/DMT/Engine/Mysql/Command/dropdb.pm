@@ -10,9 +10,10 @@ extends 'DMT::Engine::Mysql::Command';
 with 'DMT::Roles::Command::dropdb';
 
 has 'database' => (
-    is => 'ro',
-    isa => 'Str',
-    required => 1,
+    is            => 'ro',
+    isa           => 'Str',
+    required      => 1,
+    documentation => 'Name of the database to be dropped. Mandatory Option.',
 );
 
 sub abstract {
