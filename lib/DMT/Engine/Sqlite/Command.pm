@@ -6,12 +6,13 @@ use 5.016;
 use Data::Dump qw(dump);
 use Carp;
 use Readonly;
+use File::Which qw(which);
 
 extends 'MooseX::App::Cmd::Command';
 with 'MooseX::SimpleConfig';
 with 'DMT::Roles::Command::Core';
 
-Readonly my $SQLITE3      => q(/usr/bin/sqlite3);
+Readonly my $SQLITE3      => q(sqlite3);
 
 has 'database' => (
     is       => 'ro',
@@ -36,7 +37,15 @@ has '+log4perl_conf' => (
 sub _get_sqlite3_cli {
     my ($self) = @_;
 
-    return qq( $SQLITE3 );
+    my @cmd;
+
+    my $executable = which($SQLITE3);
+    die "Cannot find $SQLITE3 in your path" if not defined $executable;
+    die "$SQLITE3 not executable" if not -x $executable;
+
+    push @cmd, $SQLITE3;
+
+    return wantarray ? @cmd : "@cmd";
 }
 
 __PACKAGE__->meta->make_immutable();

@@ -27,8 +27,14 @@ has 'dump_dir' => (
 
 sub _get_dump_command {
     my ($self) = @_;
+    
+    my $sqlite3_dump_command = q(.dump);
 
-    return q(.dump);
+    return $self->_get_sqlite3_cli()
+         . q( )
+         . $self->database
+         . q( )
+         . $sqlite3_dump_command;
 }
 
 sub _dump_database {
@@ -48,11 +54,10 @@ sub _dump_database {
             $self->database->basename 
     );
 
-	my $dump_cmd = $self->_get_sqlite3_cli() . q( ) . $self->database;
-	my $stdin    = $self->_get_dump_command();
-	my $output   = $self->_call_run3( $dump_cmd, \$stdin );
+	my $dump_cmd = $self->_get_dump_command();
+       $dump_cmd .= q( > ) . $dump_file;
 
-	$dump_file->spew($output) if defined $output;
+	$self->_call_run3( $dump_cmd );
 
     $self->logger->info(q(Done));
 
