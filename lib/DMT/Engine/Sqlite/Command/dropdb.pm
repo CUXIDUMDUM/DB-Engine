@@ -18,9 +18,13 @@ sub abstract {
 sub _drop_database {
 	my ($self) = @_;
 
+    $self->logger->info(q(Start));
+
 	$self->database->remove
 		or $self->logger->logdie(
 		q(Could not remove database file ) . $self->database );
+
+    $self->logger->info(q(Done));
 
 	return;
 }

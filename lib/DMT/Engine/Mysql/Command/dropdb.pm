@@ -39,7 +39,11 @@ sub _drop_database_command {
 sub _drop_database {
     my ($self) = @_;
 
+    $self->logger->info(q(Start));
+
     $self->_call_run3( $self->_drop_database_command() );
+
+    $self->logger->info(q(Done));
 
     return;
 }

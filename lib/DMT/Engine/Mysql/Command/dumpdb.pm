@@ -43,6 +43,8 @@ sub _dump_database_command {
 sub _dump_database {
     my ($self) = @_;
 
+    $self->logger->info(q(Start));
+
     my $dir = dir( $self->dump_dir );
     $dir->mkpath(1) unless -d $dir->stringify;
 
@@ -53,8 +55,8 @@ sub _dump_database {
         $self->_call_run3($cmd);
     }
 
+    $self->logger->info(q(Done));
     return;
-
 }
 
 __PACKAGE__->meta->make_immutable();

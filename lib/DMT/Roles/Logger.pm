@@ -8,7 +8,7 @@ use English qw( -no_match_vars );
 use Carp;
 use Readonly;
 use Data::Dump qw(dump);
-use Log::Log4perl;
+use Log::Log4perl qw(:easy);
 
 use Moose::Role;
 use namespace::autoclean;
@@ -32,12 +32,22 @@ sub _build_logger {
     my ($self) = @_; 
     my $log = Log::Log4perl::Logger->get_logger(__PACKAGE__);
 
+    $SIG{__DIE__} = sub {
+        if($^S) {
+            # We're in an eval {} and don't want log
+            # this message but catch it later
+            return;
+        }
+        $Log::Log4perl::caller_depth++;
+        $log->logdie(@_);
+    };
+
     unless ( Log::Log4perl->initialized() ) { 
         if ( $self->has_log4perl_conf and -e $self->log4perl_conf ) { 
             Log::Log4perl->init( $self->log4perl_conf );
         }   
         else {
-            Log::Log4perl->easy_init();
+            Log::Log4perl->easy_init($DEBUG);
         }   
     }   
     return $log;

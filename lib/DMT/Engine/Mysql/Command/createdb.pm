@@ -39,7 +39,11 @@ sub _create_database_command {
 sub _create_database {
     my ($self) = @_;
 
+    $self->logger->info(q(Start));
+
     $self->_call_run3( $self->_create_database_command() );
+
+    $self->logger->info(q(Done));
 }
 
 __PACKAGE__->meta->make_immutable();

@@ -35,6 +35,8 @@ sub _dump_database {
 
 	my ($self) = @_;
 
+    $self->logger->info(q(Start));
+
 	$self->dump_dir->mkpath(1)
         if not -d $self->dump_dir->stringify;
 
@@ -51,6 +53,8 @@ sub _dump_database {
 	my $output   = $self->_call_run3( $dump_cmd, \$stdin );
 
 	$dump_file->spew($output) if defined $output;
+
+    $self->logger->info(q(Done));
 
 	return;
 }

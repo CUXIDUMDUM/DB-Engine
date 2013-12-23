@@ -18,10 +18,13 @@ sub abstract {
 sub _create_database {
 	my ($self) = @_;
 
+    $self->logger->info(q(Start));
 
 	$self->database->dir->mkpath(1)
         if not -d $self->database->dir->stringify;
 	$self->database->touch;
+
+    $self->logger->info(q(Done));
 
 	return;
 }
