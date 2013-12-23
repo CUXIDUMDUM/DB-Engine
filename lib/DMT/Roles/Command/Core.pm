@@ -50,7 +50,7 @@ sub _call_run3 {
 
     my $exit_code = $? >> 8;
 
-    $self->logger->logdie(q(Command Failed with exit code ) . $exit_code)
+    die q(Command Failed with exit code ) . $exit_code
         if $exit_code;
 
     return $output;
