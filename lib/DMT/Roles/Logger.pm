@@ -39,7 +39,7 @@ sub _build_logger {
             return;
         }
         $Log::Log4perl::caller_depth++;
-        $log->logdie(@_);
+        $log->logconfess(@_);
     };
 
     unless ( Log::Log4perl->initialized() ) { 
