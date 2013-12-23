@@ -20,9 +20,22 @@ sub _call_run3 {
     my ($self) = shift;
     my $cmd    = shift;
     my $stdin  = shift || \undef;
+    
+    my $output = q();
+    my $error  = q();
 
-    my $stderr = sub { $self->logger->warn($_) for @_; };
-    my $stdout = sub { $self->logger->info($_) for @_; };
+    my $stderr = sub { 
+        for (@_) {
+            $self->logger->warn($_) for @_;
+            $error .= $_;
+        }
+    };
+    my $stdout = sub { 
+        for (@_) {
+            $self->logger->warn($_) for @_;
+            $output .= $_;
+        }
+    };
 
     $self->logger->debug(qq(running $cmd ));
 
@@ -35,8 +48,12 @@ sub _call_run3 {
         $stderr,
     );
 
-    croak if $?;
-    return;
+    my $exit_code = $? >> 8;
+
+    $self->logger->logdie(q(Command Failed with exit code ) . $exit_code)
+        if $exit_code;
+
+    return $output;
 }
 
 1;

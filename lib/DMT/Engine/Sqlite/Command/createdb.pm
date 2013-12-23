@@ -1,22 +1,43 @@
-package DMT::Engine::Sqlite::createdb;
+package DMT::Engine::Sqlite::Command::createdb;
 
 use Moose;
 use namespace::autoclean;
 use 5.016;
 use Data::Dump qw(dump);
 use Carp;
+use Path::Class qw(file dir);
 
 extends 'DMT::Engine::Sqlite::Command';
 with 'DMT::Roles::Command::createdb';
 
-sub _get_create_ddl {
-    my ($self) = @_;
+sub abstract {
 
+    return q(Create a sqlite database file);
 }
 
 sub _create_database {
-    my ($self) = @_;
+	my ($self) = @_;
 
+
+	$self->database->dir->mkpath(1)
+        if not -d $self->database->dir->stringify;
+	$self->database->touch;
+
+	return;
 }
 
+__PACKAGE__->meta->make_immutable();
+
 1;
+
+__END__
+
+=head1 NAME
+
+DMT::Engine::Sqlite::createdb
+
+=head1 DESCRIPTION
+
+Create a sqlite database file
+
+=cut
