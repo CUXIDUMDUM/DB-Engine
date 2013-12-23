@@ -66,3 +66,5 @@ for my $level ( qw/logdie logcroak logconfess/ ) {
     eval { $foo->logger->$level("Testing $level"); };
     ok( $@, "$level thorws exception");
 }
+
+done_testing();
