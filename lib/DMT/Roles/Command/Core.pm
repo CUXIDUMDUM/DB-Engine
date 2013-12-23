@@ -37,7 +37,7 @@ sub _call_run3 {
         }
     };
 
-    $self->logger->debug(qq(running $cmd ));
+    $self->logger->debug(qq(Running [$cmd] ));
 
     return if $self->dry_run;
 
